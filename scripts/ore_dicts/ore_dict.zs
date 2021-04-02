@@ -60,15 +60,17 @@ function unify (ore as IOreDictEntry, p as int) {
 <ore:gemCertusQuartz>.remove(<ore:gemCertusQuartz>.firstItem);
 <ore:crystalChargedCertusQuartz>.add(<appliedenergistics2:material:1>);
 
-// Manganese Dioxide Compatibility
-<ore:dustManganeseDioxide>.add(<ore:dustRegularPyrolusite>.firstItem);
+// Silicon Compatability
+<ore:itemSilicon>.add(<metaitem:plateSilicon>);
+<ore:itemSilicon>.remove(<ore:itemSilicon>.firstItem);
 
-// NC Bioplastic -> Polystyrene
-<ore:bioplastic>.add(<ore:platePolystyrene>.firstItem); 
 
 // Silicon Compatability
 <ore:itemSilicon>.add(<metaitem:plateSilicon>);
 <ore:itemSilicon>.remove(<ore:itemSilicon>.firstItem);
+
+// Ender Pearl Powder Compatability
+<ore:nuggetEnderpearl>.add(<ore:dustTinyEnderPearl>.firstItem);
 
 // Ender Pearl Powder Compatability
 <ore:nuggetEnderpearl>.add(<ore:dustTinyEnderPearl>.firstItem);
@@ -84,5 +86,5 @@ unify_oredicts(<ore:crystal*>);
 unify_oredicts(<ore:nugget*>);
 
 
-unify(<ore:bioplastic>, 0);
 unify(<ore:itemSilicon>, 0);
+unify(<ore:bioplastic>, 0);

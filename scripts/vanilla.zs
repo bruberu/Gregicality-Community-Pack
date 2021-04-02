@@ -1,4 +1,3 @@
-@@ -0,0 +1,61 @@
 import crafttweaker.item.IItemStack;
 
 val name_removals = [
@@ -42,8 +41,11 @@ recipes.addShaped("hopper", <minecraft:hopper>, [[<ore:plateIron>, <ore:gregWren
 
 // Nether Wart
 
+
 createGreenHouseRecipes(<ore:cropNetherWart>, <ore:cropNetherWart>.firstItem);
 /*
+
+
 green_house.recipeBuilder().duration(100).EUt(20)
     .notConsumable(<ore:cropNetherWart>)
     .fluidInputs([<fluid:water> * 2000])
@@ -64,3 +66,4 @@ green_house.recipeBuilder().duration(100).EUt(20)
     .outputs(<ore:cropNetherWart>.firstItem * 3)
     .buildAndRegister();
 */
+
