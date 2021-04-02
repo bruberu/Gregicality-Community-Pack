@@ -23,21 +23,26 @@ global chemical_dehydrator as RecipeMap =           RecipeMap.getByName("chemica
 global chemical_plant as RecipeMap =                RecipeMap.getByName("chemical_plant");
 global chemical_reactor as RecipeMap =              RecipeMap.getByName("chemical_reactor");
 global circuit_assembler as RecipeMap =             RecipeMap.getByName("circuit_assembler");
+global cluster_mill as RecipeMap = 					RecipeMap.getByName("cluster_mill");
 global compressor as RecipeMap =                    RecipeMap.getByName("compressor");
 global cracker as RecipeMap =                       RecipeMap.getByName("cracker");
 global cutting_saw as RecipeMap =                   RecipeMap.getByName("cutting_saw");
+global disassembler as RecipeMap =                  RecipeMap.getByName("disassembler");
 global decay_chamber as RecipeMap =                 RecipeMap.getByName("decay_chamber");
 global distillery as RecipeMap =                    RecipeMap.getByName("distillery");
 global efurnace as RecipeMap =                      RecipeMap.getByName("furnace");
 global extractor as RecipeMap =                     RecipeMap.getByName("extractor");
 global extruder as  RecipeMap =                     RecipeMap.getByName("extruder");
 global fermenter as RecipeMap =                     RecipeMap.getByName("fermenter");
+global fluid_canner as RecipeMap =                  RecipeMap.getByName("fluid_canner");
 global fluid_extractor as RecipeMap =               RecipeMap.getByName("fluid_extractor");
 global fluid_heater as RecipeMap =                  RecipeMap.getByName("fluid_heater");
 global fluid_solidifier as RecipeMap =              RecipeMap.getByName("fluid_solidifier");
 global forge_hammer as RecipeMap =                  RecipeMap.getByName("forge_hammer");
 global forming_press as RecipeMap =                 RecipeMap.getByName("forming_press");
 global fusion_reactor as RecipeMap =                RecipeMap.getByName("fusion_reactor");
+global green_house as RecipeMap =					RecipeMap.getByName("green_house");
+global implosion_compressor as RecipeMap =          RecipeMap.getByName("implosion_compressor");
 global large_centrifuge as RecipeMap =              LargeRecipeMap.of(GARecipeMaps.LARGE_CENTRIFUGE_RECIPES);
 global large_chemical_reactor as RecipeMap =        RecipeMap.getByName("large_chemical_reactor");
 global large_mixer as RecipeMap =                   RecipeMap.getByName("large_mixer");
@@ -48,9 +53,9 @@ global metal_bender as RecipeMap =                  RecipeMap.getByName("metal_b
 global mixer as RecipeMap =                         RecipeMap.getByName("mixer");
 global packer as RecipeMap =                        RecipeMap.getByName("packer");
 global polarizer as RecipeMap =                     RecipeMap.getByName("polarizer");
+global pyro as RecipeMap =                 		    RecipeMap.getByName("pyro");
 global unpacker as RecipeMap =                      RecipeMap.getByName("unpacker");
 global wiremill as RecipeMap =                      RecipeMap.getByName("wiremill");
-global implosion_compressor as RecipeMap = 			RecipeMap.getByName("implosion_compressor");
 
 // Tiered Components
 
@@ -133,7 +138,42 @@ global tieredGlass as IIngredient[] = [<ore:blockGlass>, <ore:blockGlass>, <gtad
     <gtadditions:ga_transparent_casing:5>, <gtadditions:ga_transparent_casing:6>, <gtadditions:ga_transparent_casing:6>,
     <gtadditions:ga_transparent_casing:6> ,<gtadditions:ga_transparent_casing:6>, <gtadditions:ga_transparent_casing:6>,
     <gtadditions:ga_transparent_casing:6>];
+
+global superconductors as IIngredient[] = [null, <ore:wireGtSingleMvSuperconductor>, <ore:wireGtSingleMvSuperconductor>, <ore:wireGtSingleHvSuperconductor>, <ore:wireGtSingleEvSuperconductor>, <ore:wireGtSingleIvSuperconductor>, 
+    <ore:wireGtSingleLuvSuperconductor>, <ore:wireGtSingleZpmSuperconductor>, <ore:wireGtSingleUvSuperconductor>, <ore:wireGtSingleUhvSuperconductor>, <ore:wireGtSingleUevSuperconductor>, <ore:wireGtSingleUivSuperconductor>,
+    <ore:wireGtSingleUmvSuperconductor>, <ore:wireGtSingleUxvSuperconductor>, <ore:wireGtSingleSuperconductor>];
+
+global cuttingFluids as ILiquidStack[] = [<liquid:water> * 42, <liquid:distilled_water> * 31, <liquid:lubricant> * 10];
 	
 function intCircuit(i as int) as IIngredient {
 	return <metaitem:circuit.integrated>.withTag({Configuration: i});
+}
+
+function createGreenHouseRecipes(seed as IItemStack, output as IItemStack) {
+	green_house.recipeBuilder()
+		.notConsumable(seed)
+		.fluidInputs(<liquid:water> * 2000)
+		.notConsumable(intCircuit(0))
+		.outputs(output)
+		.EUt(16)
+		.duration(1000)
+		.buildAndRegister();
+	green_house.recipeBuilder()
+		.notConsumable(seed)
+		.inputs(<ore:dustBone>)
+		.fluidInputs(<liquid:water> * 2000)
+		.notConsumable(intCircuit(1))
+		.outputs(output * 2)
+		.EUt(16)
+		.duration(1000)
+		.buildAndRegister();
+	green_house.recipeBuilder()
+		.notConsumable(seed)
+		.inputs(<ore:dustOrganicFertilizer>)
+		.fluidInputs(<liquid:water> * 2000)
+		.notConsumable(2))
+		.outputs(output * 3)
+		.EUt(16)
+		.duration(1000)
+		.buildAndRegister();
 }
